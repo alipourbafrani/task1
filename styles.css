@@ -1,0 +1,125 @@
+body {
+  background-color: #cccccc;
+  overflow: hidden;
+  margin: 0;
+  padding: 0;
+  font-family: sans-serif;
+}
+
+.shape {
+  position: absolute;
+  width: 120px;
+  height: 120px;
+  cursor: pointer;
+}
+
+.circle {
+  border-radius: 50%;
+}
+
+.square {
+  /* مربع پیش‌فرض */
+}
+
+.triangle {
+  width: 0;
+  height: 0;
+  border-left: 60px solid transparent;
+  border-right: 60px solid transparent;
+  border-bottom: 120px solid;
+  background: none;
+}
+
+.trapezoid {
+  width: 120px;
+  height: 0;
+  border-bottom: 80px solid;
+  border-left: 30px solid transparent;
+  border-right: 30px solid transparent;
+  background: none;
+}
+
+.star {
+  position: relative;
+  display: inline-block;
+  width: 0;
+  height: 0;
+  color: inherit;
+}
+.star::before,
+.star::after {
+  content: "★";
+  font-size: 120px;
+  color: inherit;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+#scoreboard {
+  position: fixed;
+  top: 10px;
+  left: 10px;
+  background: white;
+  padding: 10px 20px;
+  border-radius: 10px;
+  font-size: 1.2rem;
+  z-index: 999;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  text-align: center;
+}
+
+#hearts {
+  font-size: 1.8rem;
+  color: red;
+  min-width: 135px; /* یا حتی 120px برای اطمینان بیشتر */
+  display: flex;
+}
+.heart {
+  margin-right: 5px;
+}
+
+#levelUpMessage {
+  display: none;
+  position: fixed;
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 2.5rem;
+  color: white;
+  background-color: rgba(0, 0, 0, 0.7);
+  padding: 20px 40px;
+  border-radius: 20px;
+  z-index: 9999;
+}
+
+#gameOverText {
+  display: none;
+  position: fixed;
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 3rem;
+  color: red;
+  text-align: center;
+  z-index: 9999;
+}
+
+#startBtn {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 9999;
+}
+
+#restartBtn {
+  display: none;
+  position: fixed;
+  bottom: 80px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 9999;
+}
