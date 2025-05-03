@@ -1,13 +1,4 @@
 document.addEventListener("DOMContentLoaded", function () {
-  let fallSpeed = 5;
-  let remainingChances = 3;
-  let score = 0;
-  let colors = ["red", "blue", "yellow", "purple", "black"];
-  let shapes = ["square", "circle", "triangle", "trapezoid", "star"];
-  let gameInterval;
-  let speedUpInterval;
-  let currentLevel = 1;
-
   const startBtn = document.getElementById("startBtn");
   const restartBtn = document.getElementById("restartBtn");
   const levelUpMessage = document.getElementById("levelUpMessage");
@@ -15,6 +6,14 @@ document.addEventListener("DOMContentLoaded", function () {
   const hearts = document.getElementById("hearts");
   const gameOverText = document.getElementById("gameOverText");
 
+  let fallSpeed = 5;
+  let remainingChances = 3;
+  let score = 0;
+  let colors = ["red", "blue", "yellow", "purple", "green"];
+  let shapes = ["square", "circle", "triangle", "trapezoid", "star"];
+  let gameInterval;
+  let speedUpInterval;
+  let currentLevel = 1;
   startBtn.addEventListener("click", function () {
     startBtn.style.display = "none";
     startGame();
