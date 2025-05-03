@@ -1,4 +1,4 @@
-$(document).ready(function () {
+document.addEventListener("DOMContentLoaded", function () {
   let fallSpeed = 5;
   let remainingChances = 3;
   let score = 0;
@@ -8,12 +8,19 @@ $(document).ready(function () {
   let speedUpInterval;
   let currentLevel = 1;
 
-  $("#startBtn").click(function () {
-    $(this).hide();
+  const startBtn = document.getElementById("startBtn");
+  const restartBtn = document.getElementById("restartBtn");
+  const levelUpMessage = document.getElementById("levelUpMessage");
+  const scoreDisplay = document.getElementById("score");
+  const hearts = document.getElementById("hearts");
+  const gameOverText = document.getElementById("gameOverText");
+
+  startBtn.addEventListener("click", function () {
+    startBtn.style.display = "none";
     startGame();
   });
 
-  $("#restartBtn").click(function () {
+  restartBtn.addEventListener("click", function () {
     location.reload();
   });
 
@@ -30,9 +37,10 @@ $(document).ready(function () {
     fallSpeed += 1;
     currentLevel++;
 
-    $("#levelUpMessage").html(`Level ${currentLevel} ! `).fadeIn(300);
+    levelUpMessage.textContent = `Level ${currentLevel} `;
+    fadeIn(levelUpMessage, 300);
     setTimeout(function () {
-      $("#levelUpMessage").fadeOut(500);
+      fadeOut(levelUpMessage, 500);
     }, 2000);
   }
 
@@ -45,32 +53,30 @@ $(document).ready(function () {
     const shapeType = shapes[Math.floor(Math.random() * shapes.length)];
     const color = colors[Math.floor(Math.random() * colors.length)];
 
-    const shape = $('<div class="shape"></div>');
-    shape.addClass(shapeType);
-    shape.css("color", color);
+    const shape = document.createElement("div");
+    shape.classList.add("shape", shapeType);
+    shape.style.color = color;
 
     if (shapeType === "square" || shapeType === "circle") {
-      shape.css("background-color", color);
+      shape.style.backgroundColor = color;
     } else if (shapeType === "triangle" || shapeType === "trapezoid") {
-      shape.css("border-bottom-color", color);
+      shape.style.borderBottomColor = color;
     }
 
     const size = 120;
-    shape.css({
-      left: Math.random() * (window.innerWidth - size) + "px",
-      top: "-150px",
-    });
+    shape.style.left = `${Math.random() * (window.innerWidth - size)}px`;
+    shape.style.top = "-150px";
 
-    $("body").append(shape);
+    document.body.appendChild(shape);
 
     let position = -150;
     let wasClicked = false;
 
-    shape.click(function () {
+    shape.addEventListener("click", function () {
       wasClicked = true;
       score++;
-      $("#score").text(score);
-      $(this).fadeOut(300);
+      scoreDisplay.textContent = score;
+      fadeOut(shape, 300);
     });
 
     const fallInterval = setInterval(function () {
@@ -80,23 +86,56 @@ $(document).ready(function () {
       }
 
       position += fallSpeed;
-      shape.css("top", position + "px");
+      shape.style.top = `${position}px`;
 
       if (position > window.innerHeight) {
         clearInterval(fallInterval);
 
         if (!wasClicked) {
           remainingChances--;
-          $("#hearts .heart").eq(remainingChances).remove();
+          hearts.querySelectorAll(".heart")[remainingChances].remove();
 
           if (remainingChances <= 0) {
             clearInterval(gameInterval);
             clearInterval(speedUpInterval);
-            $("#gameOverText").fadeIn(500);
-            $("#restartBtn").fadeIn(500);
+            fadeIn(gameOverText, 500);
+            fadeIn(restartBtn, 500);
           }
         }
       }
     }, 20);
+  }
+
+  function fadeIn(element, duration) {
+    element.style.opacity = 0;
+    element.style.display = "block";
+    let start = performance.now();
+
+    function fade() {
+      let elapsed = performance.now() - start;
+      element.style.opacity = Math.min(elapsed / duration, 1);
+      if (elapsed < duration) {
+        requestAnimationFrame(fade);
+      }
+    }
+
+    fade();
+  }
+
+  function fadeOut(element, duration) {
+    element.style.opacity = 1;
+    let start = performance.now();
+
+    function fade() {
+      let elapsed = performance.now() - start;
+      element.style.opacity = Math.max(1 - elapsed / duration, 0);
+      if (elapsed < duration) {
+        requestAnimationFrame(fade);
+      } else {
+        element.style.display = "none";
+      }
+    }
+
+    fade();
   }
 });

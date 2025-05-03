@@ -46,7 +46,6 @@ body {
   height: 0;
   color: inherit;
 }
-
 .star::before,
 .star::after {
   content: "★";
@@ -75,10 +74,9 @@ body {
 #hearts {
   font-size: 1.8rem;
   color: red;
-  min-width: 135px;
+  min-width: 135px; /* یا حتی 120px برای اطمینان بیشتر */
   display: flex;
 }
-
 .heart {
   margin-right: 5px;
 }
@@ -109,53 +107,19 @@ body {
   z-index: 9999;
 }
 
-/* #startBtn {
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  z-index: 9999;
-}
-
-#restartBtn {
-  display: none;
-  position: fixed;
-  bottom: 80px;
-  left: 50%;
-  transform: translateX(-50%);
-  z-index: 9999;
-} */
-
-#startBtn,
-#restartBtn {
-  position: fixed;
-  z-index: 9999;
-  padding: 15px 30px;
-  font-size: 1.2rem;
-  color: white;
-  background-color: #4caf50; /* رنگ سبز برای دکمه‌ها */
-  border: none;
-  border-radius: 10px;
-  cursor: pointer;
-  transition: background-color 0.3s ease, transform 0.3s ease;
-  transform-origin: center; /* تعیین مرکز تغییر مقیاس */
-}
-
 #startBtn {
+  position: fixed;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+  z-index: 9999;
 }
 
 #restartBtn {
   display: none;
+  position: fixed;
   bottom: 80px;
   left: 50%;
   transform: translateX(-50%);
-}
-
-#startBtn:hover,
-#restartBtn:hover {
-  background-color: #45a049; /* رنگ سبز تیره‌تر هنگام hover */
-  /* transform: scale(1.05); دکمه کمی بزرگتر می‌شود */
+  z-index: 9999;
 }
